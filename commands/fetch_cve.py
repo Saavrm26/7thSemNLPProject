@@ -1,9 +1,8 @@
 import asyncio
 import httpx
-from config import API_KEY
+from config import API_KEY, URL
 import json
 
-URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 HEADERS = {"apiKey": API_KEY}
 PAGE_SIZE = 2000
 PARALLEL_REQ = 5
@@ -31,7 +30,7 @@ def save_json(file_name, json_data):
         json.dump(json_data, f, indent=4)
 
 
-async def make_dataset():
+async def fetch_cve():
     tasks = [asyncio.create_task(process_fetch_data(i)) for i in range(PARALLEL_REQ)]
     await asyncio.gather(*tasks)
 

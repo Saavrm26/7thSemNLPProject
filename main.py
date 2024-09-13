@@ -1,10 +1,10 @@
 import asyncio
 import argparse
 import commands
+import config
 
 def fetch_cve():
     asyncio.run(commands.fetch_cve())
-
 
 def main():
     parser = argparse.ArgumentParser()
@@ -15,7 +15,6 @@ def main():
 
     args = parser.parse_args()
     args.func()
-
 
 
 if __name__ == "__main__":

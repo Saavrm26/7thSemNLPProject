@@ -9,7 +9,6 @@ PARALLEL_REQ = 5
 
 
 async def fetch_data(req_id):
-    print("sending request with id", req_id)
     make_request = True
     start_index = req_id * PAGE_SIZE
     increment = PARALLEL_REQ * PAGE_SIZE
@@ -37,6 +36,5 @@ async def fetch_cve():
 
 async def process_fetch_data(i):
     async for result in fetch_data(i):
-        file_name = f"artifacts/result_{i}_{id(result)}.json"
+        file_name = f"artifacts/api_calls/result_{i}_{id(result)}.json"
         save_json(file_name, result)
-        print(f"Saved result from task {i} to {file_name}")

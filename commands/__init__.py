@@ -1,1 +1,2 @@
 from .fetch_cve import fetch_cve
+from .extract_working_data_from_requests import process_directory

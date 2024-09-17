@@ -14,7 +14,6 @@ def extract_working_data_from_requests(file_path):
         cve = vuln.get('cve', {})
         extracted_entry = {
             'id': cve.get('id'),
-            'cveTags': cve.get('cveTags', [])
         }
 
         descriptions = cve.get('descriptions', [])

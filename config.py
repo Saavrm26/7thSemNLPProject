@@ -10,3 +10,4 @@ ELASTIC_SEARCH_CONN_URL = os.environ.get("ELASTIC_SEARCH_CONN_URL")
 
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('words')

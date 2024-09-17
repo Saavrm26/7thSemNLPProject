@@ -11,7 +11,3 @@ class DataAccessObject(ABC):
     def retrieve(self, query):
         """Public method to retrieve data based on a query."""
         pass
-
-    def __preprocess(self, data):
-        """Private method to preprocess the data."""
-        pass

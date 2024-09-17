@@ -1,8 +1,10 @@
 import spacy
-from spacy.lang.am.examples import sentences
-from spellchecker import SpellChecker
+import nltk
+from textblob import Word
 
 nlp = spacy.load('en_core_web_sm')
+dictionary = set(nltk.corpus.words.words())
+
 
 def lower_case(text):
     """
@@ -92,18 +94,21 @@ def ner(text):
     doc = nlp(text)
     return [(ent.text, ent.label_) for ent in doc.ents]
 
-def correct_spelling(tokens):
+def correct_spelling_textblob(tokens):
     """
-    Correct spelling errors in a list of tokens.
+    This function takes a list of tokens as input and returns a list of tokens
+    with spelling errors corrected. The correction is not context-sensitive,
+    meaning that each word is corrected independently of the surrounding words.
 
     Parameters:
-    tokens (list): A list of tokens.
+    tokens (list): The input tokens to be corrected.
 
     Returns:
-    list: A list of tokens with spelling errors corrected.
+    list: The input tokens with spelling errors corrected.
     """
-    spell = SpellChecker()
-    return [spell.correction(token) for token in tokens]
+    corrected_tokens = [Word(token).correct() for token in tokens]
+    return corrected_tokens
+
 
 def apply_to_each_sentence(pipeline):
     """

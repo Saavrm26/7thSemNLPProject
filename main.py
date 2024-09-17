@@ -1,6 +1,7 @@
 import asyncio
 import argparse
 import commands
+
 import config
 
 def fetch_cve():
@@ -12,6 +13,10 @@ def main():
     subparsers.add_parser(
         "fetch_cve", help="Fetch NSIT CVE database and save to artifacts"
     ).set_defaults(func=fetch_cve)
+
+    subparsers.add_parser(
+        "ingest_data", help="Ingest data from artifacts"
+    ).set_defaults(func=lambda : commands.bulk_ingest_from_directory())
 
     args = parser.parse_args()
     args.func()

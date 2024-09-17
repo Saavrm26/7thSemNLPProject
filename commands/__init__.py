@@ -1,2 +1,3 @@
 from .fetch_cve import fetch_cve
 from .extract_working_data_from_requests import process_directory
+from .ingest_data import bulk_ingest_from_directory

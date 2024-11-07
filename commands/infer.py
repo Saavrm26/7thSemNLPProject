@@ -22,6 +22,7 @@ def extract_sequences(labeled_sequence):
 
 with open("./artifacts/predicted_bert.json", "r") as f: predicted_bert = json.load(f)
 with open("./artifacts/predicted_crf.json", "r") as f: predicted_crf = json.load(f)
+with open("./artifacts/predicted_hmm.json", "r") as f: predicted_hmm = json.load(f)
 
 def get_pretty_data(predictions):
     pretty_data = []
@@ -39,6 +40,8 @@ def get_pretty_data(predictions):
 
 bert_pretty_data = get_pretty_data(predicted_bert)
 crf_pretty_data = get_pretty_data(predicted_crf)
+hmm_pretty_data = get_pretty_data(predicted_hmm)
 
 with open("./artifacts/final_bert_results.json", "w") as f: f.write(json.dumps(bert_pretty_data, indent=4))
 with open("./artifacts/final_crf_results.json", "w") as f: f.write(json.dumps(crf_pretty_data, indent=4))
+with open("./artifacts/final_hmm_results.json", "w") as f: f.write(json.dumps(hmm_pretty_data, indent=4))

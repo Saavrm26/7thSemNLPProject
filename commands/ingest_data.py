@@ -4,7 +4,6 @@ import os
 
 from dao import ElasticSearchBM25DAO
 from nlp_preprocessor import lower_case, tokenize, lemmatize, remove_stopwords, ner, apply
-from tenacity import retry, stop_after_attempt, wait_exponential
 
 
 def preprocess_description(desc):
@@ -18,9 +17,6 @@ def preprocess_description(desc):
         "named_entities": [named_entity[0] for named_entity in named_entities]
     }
 
-retry_decorator = retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
-
-# @retry_decorator
 def bulk_ingest(file_path):
     index_name = "test"
     from dao import es_base_index_mapping
@@ -45,7 +41,7 @@ def bulk_ingest_from_directory():
     # Use multiprocessing to process the files in parallel
     with multiprocessing.Pool(processes=num_processes) as pool:
         pool.starmap(bulk_ingest, [(file_path,) for file_path in file_paths])
-        # pool.close()
-        # pool.join()
+        pool.close()
+        pool.join()
 
     print("Data ingestion completed.")
